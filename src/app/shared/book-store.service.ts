@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Book } from './book';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +9,9 @@ import { Book } from './book';
 export class BookStoreService {
   private books : Book[] = [];
 
+  private apiUrl = 'https://api5.angular-buch.com';
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
     this.books = [
       {
         isbn : '12345',
@@ -31,10 +34,13 @@ export class BookStoreService {
     ];
   }
 
-  getAll() : Book[] {
-    return this.books;
+  getAll() : Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.apiUrl}/books`);
   }
-  getSingle(isbn: string): Book |undefined {
-    return this.books.find(book => book.isbn === isbn);
+  getSingle(isbn: string): Observable<Book> {
+    return this.http.get<Book>(`${this.apiUrl}/books/${isbn}`);
+  }
+  remove(isbn: string): Observable<unknown>{
+    return this.http.delete(`${this.apiUrl}/books/${isbn}`);
   }
 }

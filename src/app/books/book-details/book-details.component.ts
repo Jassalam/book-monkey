@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Book } from '../../shared/book';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookStoreService } from 'src/app/shared/book-store.service';
 
 @Component({
@@ -13,11 +13,21 @@ export class BookDetailsComponent {
   constructor(
     private service: BookStoreService,
     private route: ActivatedRoute,
+    private router: Router,
   ){
     const isbn = this.route.snapshot.paramMap.get('isbn')!;
-    this.book = this.service.getSingle(isbn);
+    this.service.getSingle(isbn).subscribe(book => {
+      this.book = book;
+    });
   }
 
-  
+removeBook(isbn: string){
+  if(window.confirm('Remove Book?')){
+    this.service.remove(isbn).subscribe(()=>{
+      this.router.navigateByUrl('/books');
+    });
+  }
+}
+
 
 }
