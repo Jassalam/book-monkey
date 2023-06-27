@@ -56,4 +56,9 @@ export class BookStoreService {
       })
     )
   }
+
+create(book: Book): Observable<Book>{
+  return this.http.post<Book>(`${this.apiUrl}/books`, book);
+}
+
 }
