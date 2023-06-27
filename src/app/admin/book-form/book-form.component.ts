@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { Book } from 'src/app/shared/book';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 
@@ -7,7 +7,8 @@ import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.css']
 })
-export class BookFormComponent {
+export class BookFormComponent implements OnChanges{
+  @Input() book?: Book;
 
 
   @Output() submitBook = new EventEmitter<Book>();
@@ -30,10 +31,14 @@ export class BookFormComponent {
     published: new FormControl('', {nonNullable: true}),
     thumbnailUrl: new FormControl('', {nonNullable: true}),
 
-    authors: new FormArray([
-      new FormControl('', { nonNullable: true})
-    ])
+    authors: this.buildAuthorsArray(['']),
   });
+
+  private buildAuthorsArray(authors: string[]){
+    return new FormArray(
+      authors.map(v => new FormControl(v, {nonNullable: true}))
+    );
+  }
 
   get authors(){
     return this.form.controls.authors;
@@ -54,6 +59,21 @@ export class BookFormComponent {
       authors
     };
     this.submitBook.emit(newBook);
+  }
+
+  ngOnChanges(): void {
+    if(this.book){
+      this.setFormValues(this.book);
+    }
+    
+  }
+
+  private setFormValues(book: Book){
+    this.form.patchValue(book);
+    this.form.setControl(
+      'authors',
+      this.buildAuthorsArray(book.authors)
+    );
   }
 
 }
