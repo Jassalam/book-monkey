@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Book } from 'src/app/shared/book';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'bm-book-form',
@@ -28,8 +28,22 @@ export class BookFormComponent {
     }),
     description: new FormControl('',{nonNullable: true}),
     published: new FormControl('', {nonNullable: true}),
-    thumbnailUrl: new FormControl('', {nonNullable: true})
+    thumbnailUrl: new FormControl('', {nonNullable: true}),
+
+    authors: new FormArray([
+      new FormControl('', { nonNullable: true})
+    ])
   });
+
+  get authors(){
+    return this.form.controls.authors;
+  }
+
+  addAuthorControl(){
+    this.authors.push(
+      new FormControl('', {nonNullable: true})
+    );
+  }
 
   submitForm(){
     const formValue = this.form.getRawValue();
