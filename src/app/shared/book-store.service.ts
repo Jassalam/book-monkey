@@ -67,4 +67,10 @@ update(book: Book): Observable<Book>{
     book,
   )
 }
+check(isbn: string): Observable<boolean>{
+  return this.http.get<boolean>(
+    `${this.apiUrl}/books/${isbn}/check`
+  )
+}
+
 }
