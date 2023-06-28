@@ -2,12 +2,23 @@
 
     <label for="title">Title</label>
     <input id="title" formControlName="title">
+    <bm-form-errors controlName="title"
+    [messages]="{required: 'Title is required' }">
+    </bm-form-errors>
 
     <label for="subtitle">Subtitle</label>
     <input id="subtitle" formControlName="subtitle">
 
     <label for="isbn">ISBN</label>
     <input id="isbn" formControlName="isbn">
+    <bm-form-errors 
+    controlName="isbn"
+    [messages]="{
+        required: 'ISBN is required',
+        isbnFormat: 'ISBN must have 10 or 13 chars',
+        isbnExists: 'ISBN already exists'}"
+        >
+    </bm-form-errors>
 
     <label>Authors</label>
     <button type="button" class="add"
@@ -18,6 +29,10 @@
         [attr.aria-label]="'Author ' + i"
         [formControlName]="i">
     </fieldset>
+    <bm-form-errors 
+    controlName="authors"
+    [messages]="{ atLeastOneValue: 'At least one author required' }">
+    </bm-form-errors>
 
     <label for="description">Description</label>
     <textarea id="description" formControlName="description"></textarea>
