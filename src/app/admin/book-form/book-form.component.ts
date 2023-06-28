@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { Book } from 'src/app/shared/book';
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { atLeastOneValue } from '../shared/validators';
 
 @Component({
   selector: 'bm-book-form',
@@ -36,7 +37,8 @@ export class BookFormComponent implements OnChanges{
 
   private buildAuthorsArray(authors: string[]){
     return new FormArray(
-      authors.map(v => new FormControl(v, {nonNullable: true}))
+      authors.map(v => new FormControl(v, {nonNullable: true})),
+    atLeastOneValue
     );
   }
 
@@ -62,10 +64,25 @@ export class BookFormComponent implements OnChanges{
   }
 
   ngOnChanges(): void {
+    console.log("changes here");
+    debugger;
     if(this.book){
       this.setFormValues(this.book);
+      this.setEditMode(true);
+    }else {
+      this.setEditMode(false);
     }
     
+  }
+
+  private setEditMode(isEditing: boolean){
+    const isbnControl= this.form.controls.isbn;
+
+    if(isEditing){
+      isbnControl.disable();
+    }else{
+      isbnControl.enable();
+    }
   }
 
   private setFormValues(book: Book){
