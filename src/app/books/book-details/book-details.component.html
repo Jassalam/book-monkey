@@ -12,7 +12,7 @@
         </div>
         <div>
             <h2>ISBN</h2>
-            {{book.isbn}}
+            {{book.isbn | isbn}}
         </div>
         <div *ngIf="book.published">
             <h2>Published</h2>
@@ -24,7 +24,9 @@
     <img *ngIf="book.thumbnailUrl" [src]="book.thumbnailUrl" alt="Cover">
     <a class="button" routerLink="..">Back to list</a>
 
-    <button class="red" (click)="removeBook(book.isbn)">
+    <button class="red" 
+    bmConfirm="Remove Book?"
+    (confirm)="removeBook(book.isbn)">
         Remove Book
     </button>
 

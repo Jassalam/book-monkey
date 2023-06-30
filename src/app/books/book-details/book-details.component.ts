@@ -10,24 +10,24 @@ import { Observable } from 'rxjs';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent {
-  book$ : Observable<Book>;
-   
+  book$: Observable<Book>;
+
   constructor(
     private service: BookStoreService,
     private route: ActivatedRoute,
     private router: Router,
-  ){
+  ) {
     const isbn = this.route.snapshot.paramMap.get('isbn')!;
     this.book$ = this.service.getSingle(isbn);
   }
 
-removeBook(isbn: string){
-  if(window.confirm('Remove Book?')){
-    this.service.remove(isbn).subscribe(()=>{
+  removeBook(isbn: string) {
+    this.service.remove(isbn).subscribe(() => {
       this.router.navigateByUrl('/books');
     });
   }
+
 }
 
 
-}
+
