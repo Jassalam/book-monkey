@@ -3,7 +3,8 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 
 @Directive({
-  selector: '[bmLoggedinOnly]'
+  selector: '[bmLoggedinOnly]',
+  standalone: true
 })
 export class LoggedinOnlyDirective implements OnDestroy{
   private destroy$ = new Subject<void>();

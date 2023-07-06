@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { AuthInterceptor } from './shared/auth.interceptor';

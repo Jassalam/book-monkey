@@ -1,12 +1,20 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Book } from '../../shared/book';
 import { BookStoreService } from 'src/app/shared/book-store.service';
-import { Observable
- } from 'rxjs';
+import { Observable} from 'rxjs';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { BookListItemComponent } from "../book-list-item/book-list-item.component";
+
+
 @Component({
-  selector: 'bm-book-list',
-  templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css']
+    selector: 'bm-book-list',
+    templateUrl: './book-list.component.html',
+    styleUrls: ['./book-list.component.css'],
+    standalone: true,
+    imports: [
+        NgIf, NgFor, AsyncPipe, 
+        BookListItemComponent
+    ]
 })
 export class BookListComponent {
 

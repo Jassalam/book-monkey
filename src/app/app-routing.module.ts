@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'books',
-    loadChildren: () => import('./books/books.module').then(m => m.BooksModule)
+    loadChildren: () => import('./books/books-routing.module').then(m => m.BOOKS_ROUTES)
   },
   {
     path: 'admin',
