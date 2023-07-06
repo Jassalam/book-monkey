@@ -16,10 +16,14 @@ export class AuthService {
   }
 
   login(){
+    console.log("login clicked");
     this._isAuthenticated$.next(true);
+    console.log(this.isAuthenticated);
   }
 
   logout(){
+    console.log("logout clicked");
     this._isAuthenticated$.next(false);
+    console.log(this.isAuthenticated);
   }
 }

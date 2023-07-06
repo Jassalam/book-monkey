@@ -7,6 +7,7 @@ import { BookListItemComponent } from './book-list-item/book-list-item.component
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { IsbnPipe } from './shared/isbn.pipe';
 import { ConfirmDirective } from './shared/confirm.directive';
+import { LoggedinOnlyDirective } from './shared/loggedin-only.directive';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ConfirmDirective } from './shared/confirm.directive';
     BookListItemComponent,
     BookDetailsComponent,
     IsbnPipe,
-    ConfirmDirective
+    ConfirmDirective,
+    LoggedinOnlyDirective
   ],
   imports: [
     CommonModule,

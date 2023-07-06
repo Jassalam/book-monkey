@@ -13,6 +13,7 @@
     <button class="green"
     (click)="auth.login()"
     *ngIf="!auth.isAuthenticated">Login</button>
+    
     <button class="red"
     (click)="auth.logout()"
     *ngIf="auth.isAuthenticated">Logout</button>

@@ -24,6 +24,7 @@
     <img *ngIf="book.thumbnailUrl" [src]="book.thumbnailUrl" alt="Cover">
     <a class="button" routerLink="..">Back to list</a>
 
+    <ng-container  *bmLoggedinOnly>
     <button class="red" 
     bmConfirm="Remove Book?"
     (confirm)="removeBook(book.isbn)">
@@ -34,4 +35,5 @@
     [routerLink]="['/admin/edit', book.isbn]">
     Edit book
     </a>
+</ng-container>
 </div>
