@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+
 
 import { BookStoreService } from './book-store.service';
 
@@ -6,9 +6,14 @@ describe('BookStoreService', () => {
   let service: BookStoreService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(BookStoreService);
+   
+    service = new BookStoreService();
   });
+
+  it('should hold a hardcoded list of 2 books', ()=>{
+    const books = service.getAll();
+    expect(books).toHaveSize(2);
+  })
 
   it('should be created', () => {
     expect(service).toBeTruthy();
